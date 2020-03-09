@@ -1,11 +1,17 @@
 #include "Bataxdevino.h"
 #include <LiquidCrystal.h>
 #include <Arduino.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+* Print Character to LCD 16*2
+**/
 void Bataxdevino::lcdPrint(LiquidCrystal lcd,int row, int col, char* msg, bool clear = false)
 {
 	if(clear == true) lcd.clear();
 	lcd.setCursor(col,row);
-  	lcd.print(msg);
+  	lcd.print((String)msg);
 }
 
 /**
@@ -28,5 +34,13 @@ int Bataxdevino::readLcdButton(int pin)
 		result = 4;
 	}
 	return(result);
+}
+
+/**
+* Convert Interger to Char using stdlib
+**/
+char* Bataxdevino::intToChar(int value,int base)
+{
+	return itoa(value,Bataxdevino::buffer,base);
 }
 
